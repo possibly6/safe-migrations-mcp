@@ -36,14 +36,14 @@ Local-first. Zero cloud dependency. ~2k LOC of Python, hardened against the usua
 
 ---
 
-## Install & run (one command)
+## Install & run
 
 ```bash
-pip install safe-migrations-mcp          # or: pipx install safe-migrations-mcp
+pip install git+https://github.com/possibly6/safe-migration-mcp
 safe-migrations-mcp                      # speaks MCP over stdio
 ```
 
-From source:
+Or from a local clone:
 
 ```bash
 git clone https://github.com/possibly6/safe-migration-mcp
@@ -52,11 +52,11 @@ pip install -e '.[all]'
 safe-migrations-mcp
 ```
 
-Optional extras:
+Optional extras (Postgres / MySQL drivers):
 
-- `pip install 'safe-migrations-mcp[postgres]'` — adds `psycopg`
-- `pip install 'safe-migrations-mcp[mysql]'`    — adds `PyMySQL`
-- `pip install 'safe-migrations-mcp[all]'`      — both
+- `pip install 'git+https://github.com/possibly6/safe-migration-mcp#egg=safe-migrations-mcp[postgres]'` — adds `psycopg`
+- `pip install 'git+https://github.com/possibly6/safe-migration-mcp#egg=safe-migrations-mcp[mysql]'`    — adds `PyMySQL`
+- `pip install 'git+https://github.com/possibly6/safe-migration-mcp#egg=safe-migrations-mcp[all]'`      — both
 
 SQLite, YAML, JSON, `.env`, and Prisma/Drizzle schema-file parsing work with
 zero extra deps.
