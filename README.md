@@ -4,9 +4,11 @@
 
 A misplaced `DROP COLUMN`, a missing `WHERE`, a one-character `.env` typo — Claude Code, Cursor, OpenClaw, and every other coding agent will cheerfully execute the change and report success while your data quietly vanishes.
 
+> *This was born from watching an OpenClaw agent break its own config file trying to make a "small" change.* The fix turned out to be universal: any agent that can edit anything should have to slow down, show its work, and ask first.
+
 **Safe Migrations MCP is the gate they have to pass through first.** Every proposed schema change or config edit is diffed, risk-flagged, snapshotted, and requires a one-time confirmation token from a fresh `simulate_impact` call before a single byte is written.
 
-Works with any MCP-capable agent. Local-first. Zero cloud dependency. Born from watching an OpenClaw agent break its own config file trying to make a "small" change — the fix is universal.
+Works with any MCP-capable agent. Local-first. Zero cloud dependency.
 
 ---
 
