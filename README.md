@@ -21,13 +21,15 @@ Safe Migrations MCP puts a mandatory checkpoint between the agent and your
 disk:
 
 1. **Propose** — agent sends an intent (natural language or raw SQL, or a
-   new config file); server returns a `proposal_id` and full rollback plan.
+   new config file); server returns a `proposal_id` plus a redacted preview
+   and SHA-256 hash of the SQL/edit and its rollback. Full payload is stored
+   server-side, never echoed back.
 2. **Simulate** — dry-run inside a rolled-back transaction; count affected
    rows; surface every DROP, TRUNCATE, NOT-NULL-without-default, secret-key
-   removal, etc.
-3. **Apply** — only runs with the one-time `confirmation_token` returned by
-   `simulate_impact`. Snapshots the
-   file or DB first. Logs everything to an append-only audit trail.
+   removal, etc. On success, returns a one-time `confirmation_token` bound
+   to the proposal's fingerprint.
+3. **Apply** — only runs with that fresh `confirmation_token`. Snapshots
+   the file or DB first. Logs everything to an append-only audit trail.
 
 Local-first. Zero cloud dependency. ~2k LOC of Python, hardened against the usual footguns (symlink writes, silent SQLite creation, MySQL DDL auto-commit, token replay, secret leakage in diffs).
 
